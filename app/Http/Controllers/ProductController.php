@@ -17,9 +17,7 @@ class ProductController extends Controller
     public function index(): \Inertia\Response
     {
         $products = Product::all();
-        return Inertia::render('products/Index', [
-            'products' => $products,
-        ]);
+        return Inertia::render('products/Index', compact('products'));
     }
 
     /**
@@ -62,7 +60,7 @@ class ProductController extends Controller
      * @return [\Inertia\Response]
      * 
      */
-    public function edit(Product $product)
+    public function edit(Product $product): \Inertia\Response
     {
         return Inertia::render('products/Edit', compact('product'));
     }
@@ -76,7 +74,7 @@ class ProductController extends Controller
      * @return [\Illuminate\Http\RedirectResponse]
      * 
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -95,9 +93,23 @@ class ProductController extends Controller
      * @return [\Illuminate\Http\RedirectResponse]
      * 
      */
-    public function delete(Product $product)
+    public function delete(Product $product): \Illuminate\Http\RedirectResponse
     {
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.'); 
+    }
+
+    
+    /**
+     * [Display the single product.]
+     *
+     * @param Product $product
+     * 
+     * @return [\Inertia\Response]
+     * 
+     */
+    public function show(Product $product): \Inertia\Response
+    {
+        return Inertia::render('products/Show', compact('product'));
     }
 }

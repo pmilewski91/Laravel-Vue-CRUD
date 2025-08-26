@@ -57,7 +57,7 @@ const page = usePage();
             </div>
 
             <div>
-                <Link :href="route('products.create')"><Button class="cursor-pointer">Create a product</Button></Link>
+                <Link :href="route('products.create')"><Button class="cursor-pointer mb-4">Create a product</Button></Link>
             </div>
 
             <div>
