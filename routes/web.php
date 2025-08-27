@@ -7,6 +7,7 @@ Route::get('/', function () {
     $products = App\Models\Product::all();
     return Inertia::render('Index', compact('products'));
 })->name('home');
+Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
@@ -19,7 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('products/{product}', [ProductController::class, 'delete'])->name('products.delete');
-    Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
+   
 });
 
 require __DIR__.'/settings.php';
